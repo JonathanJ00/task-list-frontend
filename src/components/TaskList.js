@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -35,6 +36,7 @@ const TaskList = () => {
                         <th>Title</th>
                         <th>Status</th>
                         <th>Due Date</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +46,7 @@ const TaskList = () => {
                             <td>{task.title}</td>
                             <td>{task.status}</td>
                             <td>{new Date(task.date).toLocaleString('en-GB')}</td>
+                            <td><Link to={`/${task.id}`}><button>View Details</button></Link></td>
                         </tr>
                     ))}
                     </tbody>

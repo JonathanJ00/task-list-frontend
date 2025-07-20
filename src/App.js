@@ -1,14 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskList from "./components/TaskList";
+import TaskDetail from './components/TaskDetail';
 import './App.css';
 
 function App() {
-  return (
-      <div className="App">
-        <h1>Task Management</h1>
-        <TaskList />
-      </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <h1>Task Manager</h1>
+                <Routes>
+                    <Route path="/" element={<TaskList />} />
+                    <Route path="/:id" element={<TaskDetail />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
