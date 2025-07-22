@@ -54,6 +54,11 @@ const TaskList = () => {
             ) : (
                 <p>No tasks available.</p>
             )}
+            <div className="center-button">
+                <Link to="/create">
+                    <button>Create New Task</button>
+                </Link>
+            </div>
         </div>
     );
 };
