@@ -1,4 +1,3 @@
-// src/components/TaskDetail.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -9,12 +8,14 @@ const TaskDetail = () => {
     const [task, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [status, setStatus] = useState('');
 
     useEffect(() => {
         const fetchTaskDetail = async () => {
             try {
                 const response = await axios.get(`/${id}`);
                 setTask(response.data);
+                setStatus(response.data.status);
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -24,6 +25,19 @@ const TaskDetail = () => {
 
         fetchTaskDetail();
     }, [id]);
+
+    const handleUpdateTask = async () => {
+        try {
+            const response = await axios.put(`/${id}`, {
+                status,
+            });
+            setTask(response.data);
+            alert('Task updated successfully!');
+        } catch (error) {
+            setError(error);
+            alert('Error updating task');
+        }
+    };
 
     if (loading) return <p>Loading task details...</p>;
     if (error) return <p>Error fetching task details: {error.message}</p>;
@@ -48,7 +62,22 @@ const TaskDetail = () => {
                     </tr>
                     <tr>
                         <td><strong>Status:</strong></td>
-                        <td>{task.status}</td>
+                        <td>
+                            <div className="status-container">
+                                <select
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)} // Update status value
+                                >
+                                    <option value="CREATED">Created</option>
+                                    <option value="IN_PROGRESS">In Progress</option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="CANCELLED">Cancelled</option>
+                                </select>
+                                <button onClick={handleUpdateTask} className="update-button">
+                                    Update Task
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Due Date:</strong></td>

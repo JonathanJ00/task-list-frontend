@@ -7,3 +7,12 @@
 .task-detail td {
     text-align: left;
 }
+
+.status-container {
+    display: flex;
+    width: 100%;
+}
+
+.update-button {
+    margin-left: 10px;
+}
