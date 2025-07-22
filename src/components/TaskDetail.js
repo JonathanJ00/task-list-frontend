@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import {useParams, useNavigate, Link} from 'react-router-dom';
 import './TaskDetails.css';
 
 const TaskDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [task, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -36,6 +37,19 @@ const TaskDetail = () => {
         } catch (error) {
             setError(error);
             alert('Error updating task');
+        }
+    };
+
+    const handleDeleteTask = async () => {
+        try {
+            const response = await axios.delete(`/${id}`);
+            if (response.status === 204) {
+                alert('Task deleted successfully!');
+                navigate('/');
+            }
+        } catch (error) {
+            setError(error);
+            alert('Error deleting task');
         }
     };
 
@@ -88,6 +102,13 @@ const TaskDetail = () => {
             ) : (
                 <p>Task not found.</p>
             )}
+            <div className="center-button">
+                <Link to="/create">
+                    <button onClick={handleDeleteTask} className="delete-button">
+                        Delete Task
+                    </button>
+                </Link>
+            </div>
         </div>
     );
 };
