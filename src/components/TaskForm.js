@@ -72,7 +72,7 @@ const TaskForm = () => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>
-                            Title:
+                            Title (Required):
                             <input
                                 type="text"
                                 name="title"
@@ -96,7 +96,7 @@ const TaskForm = () => {
 
                     <div>
                         <label>
-                            Status:
+                            Status (Required):
                             <select
                                 name="status"
                                 value={formData.status}
@@ -113,7 +113,7 @@ const TaskForm = () => {
 
                     <div>
                         <label>
-                            Date (yyyy-MM-dd HH:mm):
+                            Date (Required):
                             <input
                                 type="datetime-local"
                                 name="date"
