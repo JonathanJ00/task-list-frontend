@@ -88,7 +88,7 @@ const TaskDetail = () => {
                                     <option value="CANCELLED">Cancelled</option>
                                 </select>
                                 <button onClick={handleUpdateTask} className="update-button">
-                                    Update Task
+                                    Update Status
                                 </button>
                             </div>
                         </td>
