@@ -16,3 +16,9 @@
 .update-button {
     margin-left: 10px;
 }
+
+.center-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

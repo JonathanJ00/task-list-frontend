@@ -8,8 +8,9 @@ const TaskDetail = () => {
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [status, setStatus] = useState('');
+    const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const fetchTaskDetail = async () => {
@@ -33,10 +34,9 @@ const TaskDetail = () => {
                 status,
             });
             setTask(response.data);
-            alert('Task updated successfully!');
+            setSuccessMessage('Task was updated successfully!');
         } catch (error) {
-            setError(error);
-            alert('Error updating task');
+            setError('Failed to update task: ' + error.message);
         }
     };
 
@@ -102,6 +102,10 @@ const TaskDetail = () => {
             ) : (
                 <p>Task not found.</p>
             )}
+            <div className="center-message">
+                {successMessage && <div style={{color: 'green'}}>{successMessage}</div>}
+                {error && <div style={{color: 'red'}}>{error}</div>}
+            </div>
             <div className="center-button">
                 <Link to="/create">
                     <button onClick={handleDeleteTask} className="delete-button">
